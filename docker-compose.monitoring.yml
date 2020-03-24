@@ -7,9 +7,9 @@ services:
     ports:
       - ${GRAFANA_PORT}:3000
     volumes:
-      - ./data/config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
-      - ./data/config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
-      - ./data/config/grafana/provisioning/dashboards/json-exports:/var/lib/grafana/dashboards:ro
+      - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
+      - ./config/grafana/provisioning/dashboards/json-exports:/var/lib/grafana/dashboards:ro
     depends_on:
       - prometheus
 
@@ -20,7 +20,7 @@ services:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
       - ./data/prometheus:/prometheus
-      - ./data/config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
       - rocketchat
       - cadvisor
