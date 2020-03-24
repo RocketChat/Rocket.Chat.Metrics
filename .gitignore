@@ -1,1 +1,7 @@
 .env
+data/db/*
+!data/db/.gitkeep
+data/prometheus/*
+!data/prometheus/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
