@@ -40,7 +40,7 @@ As soon as the containers are up and running, you can access the Grafana UI via 
 
 ### My Rocket.Chat compose setup uses a different container name for the `rocketchat` container.
 
-Make sure to update the `depends_on` option in the monitoring compose file within the `prometheus` section as well as update the hostname in Prometheus' [scrape config](data/config/prometheus/prometheus.yml) (`./data/config/prometheus/prometheus.yml`).
+Make sure to update the `depends_on` option in the monitoring compose file within the `prometheus` section as well as update the hostname in Prometheus' [scrape config](config/prometheus/prometheus.yml) (`./config/prometheus/prometheus.yml`).
 
 ### I want to access the Prometheus Web UI.
 
