@@ -5,7 +5,7 @@ services:
     image: grafana/grafana:6.6.2
     restart: unless-stopped
     ports:
-      - 3300:3000
+      - ${GRAFANA_PORT}:3000
     volumes:
       - ./data/config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./data/config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
