@@ -30,7 +30,7 @@ This repository contains a basic Monitoring stack for dockerized [Rocket.Chat](h
 
 ## Usage
 
-As soon as the containers are up and running, you can access the Grafana UI via the configured port (`${GRAFANA_PORT}`, defaults to `3300`) and select the autoprivisioned dashboard:
+As soon as the containers are up and running, you can access the Grafana UI via the configured port (`${GRAFANA_PORT}`, defaults to `3300`) and select the autoprovisioned dashboard:
 
 - _Rocket.Chat Metrics Simple_
 - _Rocket.Chat Metrics_
