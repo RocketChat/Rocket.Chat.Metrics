@@ -22,7 +22,6 @@ services:
       - ./data/prometheus:/prometheus
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
-      - rocketchat
       - cadvisor
       - node-exporter
 
