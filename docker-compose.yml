@@ -1,70 +1,48 @@
 version: '2'
 
 services:
-  rocketchat:
-    image: rocketchat/rocket.chat:3.0.4
+  grafana:
+    image: grafana/grafana:6.6.2
     restart: unless-stopped
-    command: >
-      bash -c
-        "for i in `seq 1 30`; do
-          INSTANCE_IP=$$(hostname -i) node main.js &&
-          s=$$? && break || s=$$?;
-          echo \"Tried $$i times. Waiting 5 secs...\";
-          sleep 5;
-        done; (exit $$s)"
-    mem_limit: 4G
+    ports:
+      - ${GRAFANA_PORT}:3000
     volumes:
-     - ./data/uploads:/app/uploads
-     - /tmp:/tmp
-    environment:
-     - PORT=3000
-     - ROOT_URL=http://${ROCKETCHAT_HOST}
-     - MONGO_URL=mongodb://mongo:27017/rocketchat
-     - MONGO_OPLOG_URL=mongodb://mongo:27017/local
-     - SETTINGS_BLOCKED=Prometheus_Enabled,Prometheus_Port
-     - Prometheus_Enabled=true
-     - Prometheus_Port=9458
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.rocketchat.rule=Host(`${ROCKETCHAT_HOST}`)"
-      - "traefik.http.routers.rocketchat.entrypoints=web"
+      - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
+      - ./config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
+      - ./config/grafana/provisioning/dashboards/json-exports:/var/lib/grafana/dashboards:ro
     depends_on:
-      - mongo
+      - prometheus
 
-  mongo:
-    image: mongo:4.0
-    restart: unless-stopped
-    command: mongod --smallfiles --oplogSize 128 --replSet rs0
-    volumes:
-      - ./data/db:/data/db
-
-  mongo-init-replica:
-    image: mongo:4.0
-    command: >
-      bash -c
-        "for i in `seq 1 30`; do
-          mongo mongo/rocketchat --eval \"
-            rs.initiate({
-              _id: 'rs0',
-              members: [ { _id: 0, host: 'localhost:27017' } ]})\" &&
-          s=$$? && break || s=$$?;
-          echo \"Tried $$i times. Waiting 5 secs...\";
-          sleep 5;
-        done; (exit $$s)"
-    depends_on:
-      - mongo
-
-  traefik:
-    image: traefik:v2.1.1
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.16.0
     restart: unless-stopped
     command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:${ROCKETCHAT_PORT}"
-    ports:
-     - ${ROCKETCHAT_PORT}:3000
+      - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-     - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data/prometheus:/prometheus
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
       - rocketchat
+      - cadvisor
+      - node-exporter
+
+  cadvisor:
+    image: google/cadvisor:v0.33.0
+    restart: unless-stopped
+    volumes:
+      - /var/run:/var/run
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:v0.18.1
+    restart: unless-stopped
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
