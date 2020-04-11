@@ -5,7 +5,7 @@ services:
     image: grafana/grafana:6.6.2
     restart: unless-stopped
     ports:
-      - ${GRAFANA_PORT}:3000
+      - 3000:3000
     volumes:
       - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
@@ -21,27 +21,3 @@ services:
     volumes:
       - ./data/prometheus:/prometheus
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-    depends_on:
-      - cadvisor
-      - node-exporter
-
-  cadvisor:
-    image: google/cadvisor:v0.33.0
-    restart: unless-stopped
-    volumes:
-      - /var/run:/var/run
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-
-  node-exporter:
-    image: quay.io/prometheus/node-exporter:v0.18.1
-    restart: unless-stopped
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
