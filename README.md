@@ -25,9 +25,11 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 
 4. Access your Grafana instance via `http://${HOST_IP}:3300`.
 
-## Usage
+## Configuration
 
-### Monitor a single Rocket.Chat server
+### Prometheus
+
+#### Monitor a single Rocket.Chat server
 
 To monitor one or multiple static Rocket.Chat systems ("static" in terms of the Prometheus metrics endpoint doesn't change and is always available under the same address) you just have to add each of your Rocket.Chat hostnames in the [`./config/prometheus/prometheus.yml`](config/prometheus/prometheus.yml) file like this:
 
@@ -41,7 +43,7 @@ To monitor one or multiple static Rocket.Chat systems ("static" in terms of the 
 
 Where `rocketchat1.company.com` and `rocketchat2.company.com` are reachable endpoints from within the Prometheus container.
 
-### Monitor a multi-instance or Docker-based Rocket.Chat server/setup
+#### Monitor a multi-instance or Docker-based Rocket.Chat server/setup
 
 In case you have a Docker-based setup that might scale additional application instances in and out on the fly, you can use Prometheus DNS discovery method. Please make sure that the Prometheus container is within the same Docker network as your Rocket.Chat application containers. Use a configuration like this:
 
@@ -56,12 +58,21 @@ In case you have a Docker-based setup that might scale additional application in
 
 Make sure to update `rocketchat` with the container name of your Rocket.Chat application container.
 
-### Using Grafana
+### Grafana
+
+#### Using Grafana
 
 As soon as the containers are up and running, you can access the Grafana UI via the configured port and select the autoprovisioned dashboard:
 
 - _Rocket.Chat Metrics Simple_
 - _Rocket.Chat Metrics_
+
+#### Default credentials
+
+#### Additional system and Docker monitoring dashboards (optional)
+
+- cadvisor
+- node-exporter
 
 ## Troubleshooting
 
