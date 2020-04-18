@@ -62,10 +62,7 @@ Make sure to update `rocketchat` with the container name of your Rocket.Chat app
 
 #### Using Grafana
 
-As soon as the containers are up and running, you can access the Grafana UI via the configured port and select the autoprovisioned dashboard:
-
-- _Rocket.Chat Metrics Simple_
-- _Rocket.Chat Metrics_
+As soon as the containers are up and running, you can access the Grafana UI via the configured port and select the autoprovisioned dashboard "_Rocket.Chat Metrics_".
 
 #### Default credentials
 
