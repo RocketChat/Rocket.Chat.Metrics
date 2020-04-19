@@ -2,28 +2,38 @@
 
 ![](https://i.imgur.com/EatD1VO.png)
 
-This repository contains a basic Monitoring setup [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat) setups, based on Grafana and Prometheus.
+This repository contains a basic Monitoring setup [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat) setups, based on Grafana and Prometheus. It currently shows and visualizes the following application metrics/information:
+
+- _General totals_ (users online/away, DDP users, diffs based on time range)
+- _Metrics_ (requests and total size per instance)
+- _NodeJS_ (active handles, requests, event loop lag, heap used, per instance heap, garbage collector)
+- _DDP rate limiter_ (by method, by type, by userId, by connectionId)
+- _Rocket.Chat Data_ (messages sent, total sent, user presence, users & sessions, Oplog, push queue, Meteor facts, total users, total rooms, notification per minute per notification type)
+- _Meteor_ (methods total time, methods time, method calls per minute)
+- _Subscriptions_ (subscription total time, subscription time, subscription calls per minute)
+- _Callbacks & Hooks_ (callbacks total time, callbacks time, callback calls per minute, hooks total time, hooks time, hook calls per minute)
+- _REST API_ (REST total time, REST time, REST calls per minute)
 
 ## Installation
 
-1. Make sure you meet all [requirements](README.md#requirements--dependencies).
+1. Make sure you meet all [requirements](#requirements--dependencies).
 
-1. Clone this repository:
+2. Clone this repository:
 
     ```shell
     git clone https://github.com/RocketChat/Rocket.Chat.Metrics /opt/docker/Rocket.Chat.Metrics
     cd /opt/docker/Rocket.Chat.Metrics
     ```
 
-2. Adjust the default Prometheus configuration accoring the [usage information below](README.md#requirements--dependencies#usage) (either for Docker-based or static Rocket.Chat setups).
+3. Adjust the default Prometheus configuration accoring the [usage information below](#prometheus) (either for Docker-based or static Rocket.Chat setups).
 
-3. Create and start up containers using `docker-compose`. Make sure to include *both* compose files:
+4. Create and start up containers using `docker-compose`. Make sure to include *both* compose files:
 
     ```
     docker-compose up -d
     ```
 
-4. Access your Grafana instance via `http://${HOST_IP}:3300`.
+5. Access your Grafana instance via `http://${HOST_IP}:3300`.
 
 ## Configuration
 
