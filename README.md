@@ -30,7 +30,7 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 4. Create and start up containers using `docker-compose`. Make sure to include *both* compose files:
 
     ```
-    docker-compose up -d
+    docker-compose -f docker-compose.yml -f docker-compose.monitoring.yml up -d
     ```
 
 5. Access your Grafana instance via `http://${HOST_IP}:3300`.
@@ -118,6 +118,7 @@ By default the port for Prometheus' Web UI is exposed for easier metric troubles
 ## Requirements / Dependencies
 
 * Up and running Rocket.Chat system
+* Prometheus enabled in Rocket.Chat (Administration -> Logs -> Prometheus)
 * Docker
 
 ## License
