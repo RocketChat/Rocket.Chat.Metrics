@@ -5,7 +5,7 @@ services:
     image: grafana/grafana:6.6.2
     restart: unless-stopped
     ports:
-      - 3000:3000
+      - 3300:3000
     volumes:
       - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
@@ -19,5 +19,5 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     volumes:
-      - ./data/prometheus:/prometheus
+      - ./data/prometheus:/data
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
