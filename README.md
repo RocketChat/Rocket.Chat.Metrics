@@ -74,6 +74,8 @@ Make sure to update `rocketchat` with the container name of your Rocket.Chat app
 
 As soon as the containers are up and running, you can access the Grafana UI via the configured port and select the autoprovisioned dashboard "_Rocket.Chat Metrics_".
 
+By default Grafana uses `admin`/`admin` as login credentials.
+
 #### Default credentials
 
 #### Additional system and Docker monitoring dashboards (optional)
