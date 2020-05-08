@@ -18,6 +18,8 @@ services:
     restart: unless-stopped
     command:
       - --config.file=/etc/prometheus/prometheus.yml
+      - '--storage.tsdb.retention.time=12w'
+      - '--storage.tsdb.path=/prometheus'
     volumes:
       - ./data/prometheus:/prometheus
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
