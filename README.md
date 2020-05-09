@@ -94,6 +94,20 @@ By default the port for Prometheus' Web UI is exposed for easier metric troubles
      - 9090:9090
 ```
 
+### How to increase the persistent storage/history of Prometheus to more than 12 weeks?
+
+You can adjust this by setting the `storage.tsdb.retention.time` command argument in the Prometheus container. For example:
+
+```
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.16.0
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - '--storage.tsdb.retention.time=1y'
+      - '--storage.tsdb.path=/prometheus'
+```
+
 ## Contributing
 
 1. Fork it
