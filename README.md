@@ -14,7 +14,7 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 - _Callbacks & Hooks_ (callbacks total time, callbacks time, callback calls per minute, hooks total time, hooks time, hook calls per minute)
 - _REST API_ (REST total time, REST time, REST calls per minute)
 
-## Installation
+## Preparation
 
 1. Make sure you meet all [requirements](#requirements--dependencies).
 
@@ -35,7 +35,7 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 
 5. Access your Grafana instance via `http://${HOST_IP}:3300`.
 
-## Configuration
+## Initial configuration
 
 ### Prometheus
 
