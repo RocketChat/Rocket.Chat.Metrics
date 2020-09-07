@@ -25,7 +25,7 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
     cd /opt/docker/Rocket.Chat.Metrics
     ```
 
-3. Adjust the default Prometheus configuration accoring the [usage information below](#prometheus) (either for Docker-based or static Rocket.Chat setups).
+3. Adjust the default Prometheus configuration according the [usage information below](#prometheus) (either for Docker-based or static Rocket.Chat setups).
 
 4. Create and start up containers using `docker-compose`. Make sure to include *both* compose files:
 
