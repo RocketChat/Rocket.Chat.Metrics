@@ -37,6 +37,12 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 
 ## Initial configuration
 
+### Rocket.Chat
+
+To allow Prometheus to scrape data from Rocket.Chat you need to make sure to enable the exporter within the Rocket.Chat admin UI → Logs → Prometheus:
+
+![](https://i.imgur.com/b5zJOLB.png)
+
 ### Prometheus
 
 #### Monitor a single Rocket.Chat server
