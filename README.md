@@ -33,7 +33,9 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
     docker-compose up -d
     ```
 
-5. Access your Grafana instance via `http://${HOST_IP}:3300`.
+5. Access your Grafana instance via `http://${HOST_IP}:3000`.
+
+    Note: If you host this metrics setup on the same system as your Rocket.Chat server, you might run into port collisions when trying to bind Grafana to port 3000 as it is already used by Rocket.Chat. Feel free to adjust it in the [`docker-compose.yml`](./docker-compose.yml) as needed.
 
 ## Initial configuration
 
