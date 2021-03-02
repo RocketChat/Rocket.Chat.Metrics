@@ -116,6 +116,12 @@ You can adjust this by setting the `storage.tsdb.retention.time` command argumen
       - '--storage.tsdb.path=/prometheus'
 ```
 
+## Metrics in detail
+
+To help reading and interpreting the graphs of this Grafana dashboard, you can find a document that explains most of our metrics and graphs that are included here:
+
+[📒 ./metrics.md](./metrics.md)
+
 ## Contributing
 
 1. Fork it
