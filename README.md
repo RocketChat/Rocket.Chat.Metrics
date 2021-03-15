@@ -29,7 +29,7 @@ This repository contains a basic Monitoring setup [Rocket.Chat](https://github.c
 
 4. Create and start up containers using `docker-compose`. Make sure to include *both* compose files:
 
-    ```
+    ```shell
     docker-compose up -d
     ```
 
@@ -97,7 +97,7 @@ By default Grafana uses `admin`/`admin` as login credentials.
 
 By default the port for Prometheus' Web UI is exposed for easier metric troubleshooting. To disable it simple remove the `ports` mapping in the `prometheus` section of the compose file:
 
-```
+```yaml
     ports:
      - 9090:9090
 ```
@@ -106,7 +106,7 @@ By default the port for Prometheus' Web UI is exposed for easier metric troubles
 
 You can adjust this by setting the `storage.tsdb.retention.time` command argument in the Prometheus container. For example:
 
-```
+```yaml
   prometheus:
     image: quay.io/prometheus/prometheus:v2.16.0
     restart: unless-stopped
@@ -115,6 +115,23 @@ You can adjust this by setting the `storage.tsdb.retention.time` command argumen
       - '--storage.tsdb.retention.time=1y'
       - '--storage.tsdb.path=/prometheus'
 ```
+
+### Prometheus container doesn't start when running by non-root Docker user
+
+If you [manage your Docker containers as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user), you might encounter the following error when trying to start the Prometheus container for the first time:
+
+```
+level=error ts=2019-08-30T05:14:43.160Z caller=query_logger.go:82 component=activeQueryTracker msg="Error opening query log file" file=/prometheus/queries.active err="open /prometheus/queries.active: permission denied"
+panic: Unable to create mmap-ed active query log
+```
+
+To fix this, adjust the permissions of the Prometheus data directory to UID/GID `65534`:
+
+```shell
+sudo chown 65534:65534 /opt/docker/Rocket.Chat.Metrics/data/prometheus/
+```
+
+More information about this can be found [in the following GitHub comment](https://github.com/prometheus/prometheus/issues/5976#issuecomment-532942295) from the official Prometheus repo.
 
 ## Metrics in detail
 
