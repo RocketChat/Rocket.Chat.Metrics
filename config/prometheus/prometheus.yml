@@ -16,3 +16,12 @@ scrape_configs:
   - names: ["rocketchat"]
     type: A
     port: 9458
+
+# Optional exporter that is necessary in case you want MongoDB metrics
+# visualized in your Grafana instance
+- job_name: mongoexporter_docker
+  scrape_interval: 30s
+  dns_sd_configs:
+  - names: ["mongoexporter"]
+    type: A
+    port: 9216

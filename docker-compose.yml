@@ -25,3 +25,11 @@ services:
     volumes:
       - ./data/prometheus:/prometheus
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  mongoexporter:
+    image: bitnami/mongodb-exporter:latest
+    restart: unless-stopped
+    environment:
+      MONGODB_URI: 'mongodb://mongo:27017/rocketchat'
+    depends_on:
+      - mongo
