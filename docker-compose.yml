@@ -10,6 +10,8 @@ services:
       - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./config/grafana/provisioning/dashboards/provider:/etc/grafana/provisioning/dashboards:ro
       - ./config/grafana/provisioning/dashboards/json-exports:/var/lib/grafana/dashboards:ro
+    environment: 
+      - GF_INSTALL_PLUGINS=digiapulssi-breadcrumb-panel,grafana-polystat-panel
     depends_on:
       - prometheus
 
