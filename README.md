@@ -1,3 +1,16 @@
+# 🚨 Dashboard Deprecation Notice
+
+**The dashboards published in this repository are deprecated.**
+
+For the latest and most up-to-date Rocket.Chat dashboards, please retrieve them directly from Grafana's official dashboard directory:
+
+- [Rocket.Chat MicroService Metrics](https://grafana.com/grafana/dashboards/23427-microservice-metrics/)
+- [Rocket.Chat Metrics](https://grafana.com/grafana/dashboards/23428-rocket-chat-metrics/)
+
+_These dashboards are maintained and updated on Grafana.com. Please do not use the versions in this repository for new installations or updates._
+
+**These dashboards are intended to be used alongside the official [Rocket.Chat helm-chart](http://github.com/rocketchat/helm-charts/).**
+
 # Rocket.Chat.Metrics
 
 ![](https://i.imgur.com/EatD1VO.png)
